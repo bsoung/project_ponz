@@ -1,8 +1,6 @@
 const { User } = require('../models');
 const shortid = require('shortid');
 const moment = require('moment');
-const io = require('../io').getIO();
-// const client = require('../io').getClient();
 
 module.exports = {
 	index: async (req, res) => {
@@ -45,7 +43,9 @@ module.exports = {
 		// do a map user on the first user's parent
 		// { user: 'Bob, parent: susan } { user:susna } 		//
 		try {
-			const user = await User.findById(id).populate('children').populate('parent');
+			const user = await User.findById(id)
+				.populate('children')
+				.populate('parent');
 
 			const mapUser = user => {
 				return {
@@ -99,9 +99,9 @@ module.exports = {
 
 			let user = await User.create(req.body);
 
-			io.on('connection', client => {
-				client.emit('user_registered');
-			});
+			// io.on('connection', client => {
+			// 	client.emit('user_registered');
+			// });
 
 			return res.redirect('/ponzvert');
 		} catch (e) {

@@ -1,27 +1,16 @@
-const app = require("./io").getApp();
-const server = require("./io").getServer();
-const express = require("express");
-// const express = require("express");
-// const app = express();
+const express = require('express');
+const path = require('path');
+const logger = require('morgan');
+const bodyParser = require('body-parser');
+const exphbs = require('express-handlebars');
+const session = require('express-session');
+const passport = require('passport');
 
-const path = require("path");
-const logger = require("morgan");
-const bodyParser = require("body-parser");
-const exphbs = require("express-handlebars");
-const session = require("express-session");
-const passport = require("passport");
-// const server = require("http").createServer(app);
-
-// const io = require("./io")(server);
-
-app.use(
-	"/socket.io",
-	express.static(__dirname + "node_modules/socket.io-client/dist/")
-);
+const app = express();
 
 app.use(
 	session({
-		secret: "123fljwejflkkwjelk23jlkf23fl2k3jl23kfjlk23j329f4",
+		secret: '123fljwejflkkwjelk23jlkf23fl2k3jl23kfjlk23j329f4',
 		resave: true,
 		saveUninitialized: true
 	})
@@ -30,13 +19,13 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 
-const mongoose = require("mongoose");
-const Promise = require("bluebird");
+const mongoose = require('mongoose');
+const Promise = require('bluebird');
 
-const localAuth = require("./auth/passport")(passport);
+const localAuth = require('./auth/passport')(passport);
 
-if (process.env.NODE_ENV !== "production") {
-	require("dotenv").config();
+if (process.env.NODE_ENV !== 'production') {
+	require('dotenv').config();
 }
 
 // bluebird mongoose
@@ -49,7 +38,7 @@ const beginConnection = mongoose.connect(process.env.DB_URL, {
 
 beginConnection
 	.then(db => {
-		console.log("DB CONNECTION SUCCESS");
+		console.log('DB CONNECTION SUCCESS');
 	})
 	.catch(err => {
 		console.error(err);
@@ -58,13 +47,13 @@ beginConnection
 // express session
 
 // handlebars view
-app.set("views", path.join(__dirname, "views"));
+app.set('views', path.join(__dirname, 'views'));
 
 // hbs
 app.engine(
-	"handlebars",
+	'handlebars',
 	exphbs({
-		defaultLayout: "main",
+		defaultLayout: 'main',
 		helpers: {
 			toJSON: function(object) {
 				return JSON.stringify(object);
@@ -73,30 +62,30 @@ app.engine(
 	})
 );
 
-app.set("view engine", "handlebars");
+app.set('view engine', 'handlebars');
 
 // middleware
-app.use(logger("dev"));
+app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(express.static(path.join(__dirname, "public")));
+app.use(express.static(path.join(__dirname, 'public')));
 
 // routes
-app.use("/api", require("./routes/api"));
-app.use("/ponzvert", require("./routes/ponzvert"));
-app.use("/", require("./routes/index"));
-app.use("/logout", require("./routes/logout"));
+app.use('/api', require('./routes/api'));
+app.use('/ponzvert', require('./routes/ponzvert'));
+app.use('/', require('./routes/index'));
+app.use('/logout', require('./routes/logout'));
 
 app.post(
-	"/login",
-	passport.authenticate("local-login", {
-		successRedirect: "/ponzvert",
-		failureRedirect: "/",
+	'/login',
+	passport.authenticate('local-login', {
+		successRedirect: '/ponzvert',
+		failureRedirect: '/',
 		failureFlash: true
 	})
 );
 
 // listen to server
-server.listen(3000, () => {
+app.listen(3000, () => {
 	console.log(`Listening at port 3000`);
 });
