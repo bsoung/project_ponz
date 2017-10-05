@@ -1,7 +1,8 @@
 {
   "name": "project_ponz",
   "version": "1.0.0",
-  "description": "Building Ponz.io, with its endearingly upside-down-triangle-shaped business model.",
+  "description":
+    "Building Ponz.io, with its endearingly upside-down-triangle-shaped business model.",
   "main": "index.js",
   "scripts": {
     "start": "which nodemon > /dev/null && nodemon index.js || node index.js",
@@ -33,8 +34,6 @@
     "morgan": "^1.8.2",
     "passport": "^0.4.0",
     "passport-local": "^1.0.0",
-    "shortid": "^2.2.8",
-    "socket.io": "^2.0.3",
-    "socket.io-client": "^2.0.3"
+    "shortid": "^2.2.8"
   }
 }

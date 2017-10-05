@@ -1,7 +1,7 @@
 <div class="profile">
 	<h3 class="hello">Hello {{user.username}}!</h3>
 
-	<p>Your referral link is <a class="under-line" href="http://localhost:3000/ponzvert/{{user.shortid}}" target="_blank">http://localhost:3000/ponzvert/{{user.shortid}}</a></p>
+	<p>Your referral link is <a class="under-line" href="{{referralLink}}" target="_blank">{{referralLink}}</a></p>
 
 	<p>Ponz Points&#8482;: <money>{{user.points}}pz</money></p>
 	<div class="diamond">

@@ -11,6 +11,11 @@ a:hover,
 a:focus {
   text-decoration: none;
   color: black;
+  cursor: pointer;
+}
+
+button {
+  cursor: pointer;
 }
 
 body {

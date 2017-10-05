@@ -39,9 +39,8 @@ module.exports = {
 
 	viewPonzvert: async (req, res) => {
 		let id = req.user._id;
+		let referralLink;
 
-		// do a map user on the first user's parent
-		// { user: 'Bob, parent: susan } { user:susna } 		//
 		try {
 			const user = await User.findById(id)
 				.populate('children')
@@ -55,7 +54,17 @@ module.exports = {
 				};
 			};
 
-			return res.render('ponzvert/index', { user, tree: [mapUser(user)] });
+			if (process.env.NODE_ENV === 'production') {
+				referralLink = `https://project-ponz.herokuapp.com/${user.shortid}`;
+			} else {
+				referralLink = `http://localhost:3000/ponzvert/${user.shortid}`;
+			}
+
+			return res.render('ponzvert/index', {
+				user,
+				referralLink,
+				tree: [mapUser(user)]
+			});
 		} catch (e) {
 			return res.json({
 				confirmation: 'fail',
