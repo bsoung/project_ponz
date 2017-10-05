@@ -55,7 +55,7 @@ module.exports = {
 			};
 
 			if (process.env.NODE_ENV === 'production') {
-				referralLink = `https://project-ponz.herokuapp.com/${user.shortid}`;
+				referralLink = `https://project-ponz.herokuapp.com/ponzvert/${user.shortid}`;
 			} else {
 				referralLink = `http://localhost:3000/ponzvert/${user.shortid}`;
 			}
