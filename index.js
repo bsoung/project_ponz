@@ -73,8 +73,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 // routes
 app.use('/api', require('./routes/api'));
 app.use('/ponzvert', require('./routes/ponzvert'));
-app.use('/', require('./routes/index'));
 app.use('/logout', require('./routes/logout'));
+app.use('/*', require('./routes/index'));
 
 app.post(
 	'/login',
