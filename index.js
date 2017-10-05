@@ -85,7 +85,7 @@ app.post(
 	})
 );
 
+const PORT = process.env.PORT || 3000;
+
 // listen to server
-app.listen(3000, () => {
-	console.log(`Listening at port 3000`);
-});
+app.listen(PORT);
