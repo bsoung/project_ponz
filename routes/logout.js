@@ -1,9 +1,8 @@
-const router = require("express").Router();
+const router = require('express').Router();
 
-router.get("/", (req, res) => {
-  req.logout();
-
-  res.redirect("/");
-})
+router.get('/', (req, res) => {
+	req.logout();
+	res.redirect('/');
+});
 
 module.exports = router;

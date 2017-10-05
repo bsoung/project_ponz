@@ -5,6 +5,7 @@ const bodyParser = require('body-parser');
 const exphbs = require('express-handlebars');
 const session = require('express-session');
 const passport = require('passport');
+const flash = require('express-flash');
 
 const app = express();
 
@@ -15,6 +16,7 @@ app.use(
 		saveUninitialized: true
 	})
 );
+app.use(flash());
 
 app.use(passport.initialize());
 app.use(passport.session());
@@ -71,10 +73,10 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
 
 // routes
+app.use('/', require('./routes/index'));
 app.use('/api', require('./routes/api'));
 app.use('/ponzvert', require('./routes/ponzvert'));
 app.use('/logout', require('./routes/logout'));
-app.use('/', require('./routes/index'));
 
 app.post(
 	'/login',

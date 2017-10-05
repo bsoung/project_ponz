@@ -38,7 +38,8 @@ module.exports = {
 	},
 
 	viewPonzvert: async (req, res) => {
-		let id = req.user._id;
+		let id = req.user._id || req.session.user._id;
+
 		let referralLink;
 
 		try {
@@ -82,10 +83,6 @@ module.exports = {
 			});
 
 			if (existingUser) {
-				io.on('connection', client => {
-					client.emit('user_exists');
-				});
-
 				return res.redirect('/');
 			}
 		} catch (e) {
@@ -103,16 +100,17 @@ module.exports = {
 				return;
 			}
 
-			let id = shortid.generate();
+			const id = shortid.generate();
 			req.body.shortid = id;
 
-			let user = await User.create(req.body);
+			const user = await User.create(req.body);
 
-			// io.on('connection', client => {
-			// 	client.emit('user_registered');
-			// });
+			req.flash(
+				'success',
+				'You have successfully signed up! Please log in to begin.'
+			);
 
-			return res.redirect('/ponzvert');
+			return res.redirect('/');
 		} catch (e) {
 			console.error(e.stack);
 			return res.json({
@@ -128,6 +126,7 @@ async function createChildUser(req, res) {
 	try {
 		parentUser = await User.findOne({ shortid: req.session.shortid });
 		const id = shortid.generate();
+
 		req.body.shortid = id;
 		req.body.parent = parentUser._id;
 
@@ -140,10 +139,6 @@ async function createChildUser(req, res) {
 		);
 
 		updatePoints(parentUser, 40);
-
-		io.on('connection', client => {
-			client.emit('user_registered');
-		});
 
 		return res.redirect('/ponzvert');
 	} catch (e) {
@@ -172,15 +167,3 @@ async function updatePoints(parentUser, points) {
 	}
 	return updatePoints(newParentUser, points);
 }
-
-// User.findOne({ _id: req.params.id }, function(err, node) {
-// 	populateParents(node).then(function() {
-// 		// Do something with user
-// 	});
-// });
-
-// function populateParents(user) {
-// 	return User.populate(user, { parent: "parent" }).then(function(user) {
-// 		return user.parent ? populateParents(user.parent) : Promise.fulfill(user);
-// 	});
-// }

@@ -1,5 +1,5 @@
 
-
+{{log successMessage}}
 <div class="landing-page">
 
   <form class="signin-form signin" action="/login" method="post" autocomplete="off">
@@ -40,6 +40,9 @@
       <input type="password" placeholder="password" name="password" required="true">
     </div>
     <button class="login-register-btn">register</button>
+    {{#if successMessage}}
+      <p class="success-message">{{successMessage}}</p>
+    {{/if}}
   </form>
   <div>
     <img src="./assets/savonne.png" alt="savonne" width="250">
