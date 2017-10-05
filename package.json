@@ -4,7 +4,7 @@
   "description":
     "Building Ponz.io, with its endearingly upside-down-triangle-shaped business model.",
   "main": "index.js",
-  "engine": {
+  "engines": {
     "node": "8.3.0",
     "npm": "5.3.0"
   },
