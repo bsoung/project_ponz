@@ -248,7 +248,7 @@ money {
 
 .svg-container {
   border-top: 5px solid white;
-  height: 70vh;
+  height: 100%;
   width: 100%;
   overflow-x: scroll;
   overflow-y: scroll;
