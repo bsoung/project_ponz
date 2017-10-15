@@ -75,8 +75,12 @@ app.use(express.static(path.join(__dirname, 'public')));
 // routes
 app.use('/', require('./routes/index'));
 app.use('/api', require('./routes/api'));
+app.use('/login', require('./routes/login'));
+app.use('/register', require('./routes/register'));
 app.use('/ponzvert', require('./routes/ponzvert'));
+app.use('/store', require('./routes/store'));
 app.use('/logout', require('./routes/logout'));
+
 
 app.post(
 	'/login',

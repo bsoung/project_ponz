@@ -6,7 +6,7 @@ router.get('/', isLoggedIn, users.viewPonzvert);
 
 router.get('/:shortid', (req, res) => {
 	req.session.shortid = req.params.shortid;
-	return res.redirect('/');
+	return res.redirect('/register');
 });
 
 module.exports = router;
