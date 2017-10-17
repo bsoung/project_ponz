@@ -1,4 +1,6 @@
-<form class="signup-form signup" action="/api/users" method="post" autocomplete="off">
+<div class="auth-group">
+  <div class="auth-background"></div>
+  <form class="signup-form signup" action="/api/users" method="post" autocomplete="off">
   <p class="signin-title">time to swim in cash</p>
   {{#if message}}
     <h1>{{message}}</h1>
@@ -27,3 +29,6 @@
     <p class="success-message">{{successMessage}}</p>
   {{/if}}
 </form>
+  
+</div>
+
