@@ -3,7 +3,7 @@
 Become rich with Ponz Points! Recruit others into your Ponzi army by letting them register with your very own unique referral link. You receive money for each individual down the chain - up to a maximum of 7 descendants from your original recruit. Other individuals under you also have ther own unique referral links that they can use to recruit. Let's take over the globe with Ponze.io!
 
 
-[Checkout Ponze.io here!](http://project-ponz.herokuapp.com/)
+[Checkout Ponze.io here!](https://project-ponz.herokuapp.com/)
 
 If there are any problem, make sure to check if Heroku is having any issues.
 
